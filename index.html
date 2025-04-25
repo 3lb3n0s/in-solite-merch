@@ -1,0 +1,106 @@
+<!-- Structure du projet (GitHub Pages)  
+/
+  index.html
+  /css
+    style.css
+  /js
+    script.js
+  /images
+    (ajoute ici les visuels de tes produits)
+-->
+
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>(in)solite Merch</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="hero">
+    <h1>Boutique (in)solite</h1>
+    <p>Des pièces inédites pour rester dans la vibe</p>
+    <a href="#products" class="btn">Découvrir</a>
+  </header>
+
+  <main>
+    <section id="products" class="grid">
+      <!-- Les fiches produits seront injectées par script.js -->
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2025 (in)solite • <a href="https://in-solite.ch">in-solite.ch</a></p>
+  </footer>
+  <script src="js/script.js" defer></script>
+</body>
+</html>
+
+<!-- css/style.css -->
+:root {
+  --primary: #f5d042;
+  --dark: #2a2a2a;
+  --light: #fff;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: sans-serif; color: var(--dark); background: var(--light); line-height: 1.5; }
+.hero { text-align: center; padding: 4rem 1rem; background: var(--primary); color: var(--dark); }
+.hero h1 { font-size: 2.5rem; margin-bottom: .5rem; }
+.hero .btn { display: inline-block; margin-top: 1rem; padding: .75rem 1.5rem; text-decoration: none; background: var(--dark); color: var(--light); border-radius: .5rem; }
+.grid { display: grid; gap: 1.5rem; padding: 2rem 1rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.card { border: 1px solid #eee; border-radius: .5rem; overflow: hidden; background: var(--light); display: flex; flex-direction: column; }
+.card img { width: 100%; height: auto; }
+.card-content { padding: 1rem; flex: 1; display: flex; flex-direction: column; }
+.card-content h2 { font-size: 1.25rem; margin-bottom: .5rem; }
+.card-content p { flex: 1; font-size: .9rem; margin-bottom: 1rem; }
+.card-content .price { font-weight: bold; margin-bottom: .75rem; }
+.card-content .btn-buy { text-align: center; padding: .5rem; text-decoration: none; background: var(--primary); color: var(--dark); border-radius: .5rem; }
+.footer { text-align: center; padding: 1rem; font-size: .8rem; background: #f9f9f9; }
+
+<!-- js/script.js -->
+const products = [
+  {
+    name: "T-shirt Light & Groove",
+    desc: "Coton bio, sérigraphie fluide",
+    price: "29.00 CHF",
+    img: "images/tshirt.jpg"
+  },
+  {
+    name: "Casquette Golden Hour",
+    desc: "Broderie ton sur ton, réglable",
+    price: "24.00 CHF",
+    img: "images/casquette.jpg"
+  },
+  {
+    name: "Tote-bag Morning Rise",
+    desc: "Toile épaisse, durable",
+    price: "19.00 CHF",
+    img: "images/totebag.jpg"
+  },
+  {
+    name: "Mug Midday Groove",
+    desc: "Céramique mate, 350ml",
+    price: "15.00 CHF",
+    img: "images/mug.jpg"
+  }
+];
+
+document.addEventListener('DOMContentLoaded', () => {
+  const container = document.getElementById('products');
+  products.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <img src="${p.img}" alt="${p.name}">
+      <div class="card-content">
+        <h2>${p.name}</h2>
+        <p>${p.desc}</p>
+        <div class="price">${p.price}</div>
+        <a href="#" class="btn-buy">Ajouter au panier</a>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+});
